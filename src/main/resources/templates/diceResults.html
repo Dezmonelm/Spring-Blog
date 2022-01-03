@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dice Results</title>
+</head>
+<body>
+<div>
+  <p>Dice Number: <span th:text="${diceNumber}"></span></p>
+  <p>Guess Number: <span th:text="${number}"></span></p>
+</div>
+
+<th:block th:if="${number == diceNumber}">
+    <p>NOICE!!!</p>
+</th:block>
+
+<th:block th:if="${number != diceNumber}">
+    <p>sad day....sad day indeed :(</p>
+</th:block>
+</body>
+</html>
