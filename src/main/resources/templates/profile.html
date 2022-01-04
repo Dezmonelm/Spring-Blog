@@ -1,9 +1,12 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
+<head th:include="partials/partials :: bootstrap-js">
     <meta charset="UTF-8">
     <title>Profile Page</title>
 </head>
+<div th:replace="partials/partials :: navbar">
+    This div will be *replaced* by the fragment
+</div>
 <body>
 <h1>Hello, <span th:text="${viewUsername}">World</span>!</h1>
 </body>
