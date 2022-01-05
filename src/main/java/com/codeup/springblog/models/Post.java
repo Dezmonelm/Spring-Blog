@@ -1,13 +1,37 @@
 package com.codeup.springblog.models;
 
-public class Post {
+import javax.persistence.*;
 
+
+@Entity
+@Table(name="posts")
+public class Post {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
+    private long id;
+
+    @Column(nullable = false, length = 100)
     private String title;
+
+    @Column(nullable = false, length = 1000)
     private String body;
 
     public Post(String title, String body) {
         this.title = title;
         this.body = body;
+    }
+
+    public Post() {
+
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     public String getTitle() {
