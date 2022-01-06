@@ -15,13 +15,13 @@
     <h3 th:text="${post.title}"></h3>
     <h5 th:text="${post.body}" ></h5>
 
-    <form th:action="'/post/delete' + ${post.getId()}" method="get">
+    <form th:action="'/posts/edit/' + ${post.getId()}" method="get">
         <button>Edit</button>
     </form>
 
 
 
-    <form th:action="'/post/delete' + ${post.getId()}" method="post">
+    <form th:action="'/posts/delete/' + ${post.getId()}" method="post">
         <button>Delete</button>
     </form>
 

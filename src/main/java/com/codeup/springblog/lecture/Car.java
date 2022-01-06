@@ -1,6 +1,7 @@
-package com.codeup.springblog.controllers;
+package com.codeup.springblog.lecture;
 
 import javax.persistence.*;
+import java.util.List;
 
 
 @Entity
@@ -16,6 +17,9 @@ public class Car {
 
     @Column(nullable = false, length = 50)
     private String model;
+
+    @ManyToMany(mappedBy = "vehicle")
+    private List<Owners> carOwner;
 
     public void setId(long id) {
         this.id = id;

@@ -1,6 +1,7 @@
 package com.codeup.springblog.models;
 
 import javax.persistence.*;
+import java.util.List;
 
 
 @Entity
@@ -22,9 +23,12 @@ public class Post {
         this.body = body;
     }
 
-    public Post() {
+    public Post() {}
 
-    }
+    @ManyToOne
+    @JoinColumn(name="user_id")
+    private User postCreator;
+
 
     public long getId() {
         return id;
