@@ -9,5 +9,16 @@
     This div will be *replaced* by the fragment
 </div>
 
+<form th:action="@{/posts/create}" th:method="post" th:object="${post}">
+<label for="postTitle">Title of Post:</label>
+<input id="postTitle" name="postTitle" th:field="*{title}">Hold info about post TITLE
+<br>
+
+<label for="postBody">Body of Post</label>
+<input id="postBody" name="postBody" th:field="*{body}">Hold info about post Body
+
+<br>
+<button>Submit edit</button>
+</form>
 </body>
 </html>

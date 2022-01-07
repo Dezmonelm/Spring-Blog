@@ -16,13 +16,13 @@
     <h5 th:text="${post.body}" ></h5>
 
     <form th:action="'/posts/edit/' + ${post.getId()}" method="get">
-        <button>Edit</button>
+        <button class="btn btn-primary btn-lg disabled" role="button" aria-disabled="true">Edit</button>
     </form>
 
 
 
     <form th:action="'/posts/delete/' + ${post.getId()}" method="post">
-        <button>Delete</button>
+        <button class="btn btn-primary btn-lg disabled" role="button" aria-disabled="true">Delete</button>
     </form>
 
 

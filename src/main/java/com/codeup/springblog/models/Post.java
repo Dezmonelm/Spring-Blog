@@ -29,6 +29,13 @@ public class Post {
     @JoinColumn(name="user_id")
     private User postCreator;
 
+    public User getPostCreator() {
+        return postCreator;
+    }
+
+    public void setPostCreator(User postCreator) {
+        this.postCreator = postCreator;
+    }
 
     public long getId() {
         return id;

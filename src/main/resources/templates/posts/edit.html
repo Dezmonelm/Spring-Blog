@@ -9,12 +9,14 @@
 <form action="/posts/edit" method="post">
     <label for="postTitle">Title of Post:</label>
     <input id="postTitle" name="postTitle" th:value="${postToEdit.getTitle()}">Hold info about post TITLE
+    <br>
 
     <label for="postBody">Body of Post</label>
     <input id="postBody" name="postBody" th:value="${postToEdit.getBody()}">Hold info about post Body
 
     <input type="hidden" name="postId" th:value="${postToEdit.getId()}">
-    <button>Submit edit</button>
+    <br>
+    <button class="btn btn-primary btn-lg disabled" role="button" aria-disabled="true">Submit edit</button>
 </form>
 </body>
 </html>

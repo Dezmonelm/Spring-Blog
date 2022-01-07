@@ -24,6 +24,14 @@ public class User {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "postCreator")
     private List<Post> blogPost;
 
+    public List<Post> getBlogPost() {
+        return blogPost;
+    }
+
+    public void setBlogPost(List<Post> blogPost) {
+        this.blogPost = blogPost;
+    }
+
     public long getId() {
         return id;
     }

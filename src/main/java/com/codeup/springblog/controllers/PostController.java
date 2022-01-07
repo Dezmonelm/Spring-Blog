@@ -1,6 +1,7 @@
 package com.codeup.springblog.controllers;
 
 import com.codeup.springblog.models.Post;
+import com.codeup.springblog.models.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -14,13 +15,13 @@ public class PostController {
     private final PostRepository postDao;
     private final UserRepository userDao;
 
-    public PostController(PostRepository postDao, UserRepository userDao){
+    public PostController(PostRepository postDao, UserRepository userDao) {
         this.postDao = postDao;
         this.userDao = userDao;
     }
 
     @GetMapping("/posts")
-    public String viewAllPosts(Model viewModel){
+    public String viewAllPosts(Model viewModel) {
 
         List<Post> posts = postDao.findAll();
 
@@ -30,46 +31,57 @@ public class PostController {
     }
 
     @GetMapping("/posts/show")
-    public String viewOnePost(Model viewModel){
+    public String viewOnePost(Model viewModel) {
         Post newPost = new Post("Hello there!", "Wut up doe?");
+
         viewModel.addAttribute("post", newPost);
+
         return "posts/show";
     }
 
     @GetMapping("/posts/create")
-    @ResponseBody
-    public String createPostForm(){
-//        User dez
-//        userDao.save(userPost1);
-//        userDao.save(userPost2);
+    public String createPostForm(Model model){
 
-        return "redirect: /posts";
+    model.addAttribute("post", new Post());
+
+        return "/posts/create";
     }
 
     @PostMapping("/posts/create")
-    @ResponseBody
-    public String insertPost(){
+    public String insertPost(@ModelAttribute Post post) {
+        // below for creating a user for the first time
+//        User dez = new User();
+//        dez.setUsername("dez");
+//        dez.setPassword("dez");
+//        dez.setEmail("dez@send.com");
+//        userDao.save(dez);
+        post.setPostCreator(userDao.getById(2L));
+postDao.save(post);
 
-        Post newPost1 = new Post("How would you like...", "to go get some pizza?");
-        Post newPost2 = new Post("South Park the tv show...", "is very interesting!");
-
-        postDao.save(newPost1);
-        postDao.save(newPost2);
+//        Post newPost1 = new Post("How would you like...", "to go get some pizza?");
+//        Post newPost2 = new Post("South Park the tv show...", "is very interesting!");
+//
+//        newPost1.setPostCreator(postOwner);
+////        newPost2.setPostCreator(dez);
+//
+//        postDao.save(newPost1);
+//        postDao.save(newPost2);
         return "redirect:/posts";
     }
 
     @GetMapping("/posts/edit/{id}")
-    public String editPost(@PathVariable long id, Model model){
+    public String editPost(@PathVariable long id, Model model) {
         Post editPost = postDao.getById(id);
-        System.out.println("editPost.getTitile() = " + editPost.getTitle());
+
+        System.out.println("editPost.getTitle() = " + editPost.getTitle());
         System.out.println("editPost.getBody() = " + editPost.getBody());
 
         model.addAttribute("postToEdit", editPost);
-                return "posts/edit";
+        return "posts/edit";
     }
 
     @PostMapping("/posts/edit")
-    public String saveEditPost(@RequestParam(name="postBody") String postBody,@RequestParam(name="postTitle") String postTitle, @RequestParam(name="postId") long id){
+    public String saveEditPost(@RequestParam(name = "postBody") String postBody, @RequestParam(name = "postTitle") String postTitle, @RequestParam(name = "postId") long id) {
         System.out.println("id = " + id);
         System.out.println("postTitle = " + postTitle);
         System.out.println("postBody = " + postBody);
@@ -87,14 +99,13 @@ public class PostController {
     }
 
     @PostMapping("/posts/delete/{id}")
-    public String deletePost(@PathVariable long id){
+    public String deletePost(@PathVariable long id) {
+
         long deletePostId = id;
         postDao.deleteById(deletePostId);
 
         return "redirect:/posts";
     }
-
-
 
 
 }

@@ -8,7 +8,8 @@
 <div th:replace="partials/partials :: navbar">
     This div will be *replaced* by the fragment
 </div>
-    <h3 th:text="${post.title}"></h3>
-    <h4 th:text="${post.body}"></h4>
+<h3 th:text="${post.title}"></h3>
+<h4 th:text="${post.body}"></h4>
+<h5 th:text="${user.email}"></h5>
 </body>
 </html>
