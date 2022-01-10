@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head th:include="partials/partials :: bootstrap-js">
     <meta charset="UTF-8">
     <title>Index</title>
@@ -19,13 +19,9 @@
         <button class="btn btn-primary btn-lg disabled" role="button" aria-disabled="true">Edit</button>
     </form>
 
-
-
     <form th:action="'/posts/delete/' + ${post.getId()}" method="post">
         <button class="btn btn-primary btn-lg disabled" role="button" aria-disabled="true">Delete</button>
     </form>
-
-
     <br>
 </div>
 </body>

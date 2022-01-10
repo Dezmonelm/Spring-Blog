@@ -17,6 +17,18 @@
                     <a class="nav-link" href="/posts/create">Create</a>
                 </li>
             </ul>
+            <div sec:authorize="isAuthenticated()">
+                <nav>
+                    <ul>
+                        <!-- More links here... -->
+                        <li class="nav-item">
+                            <form th:action="@{/logout}" th:method="post">
+                                <button class="btn-link btn">Logout</button>
+                            </form>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
         </div>
     </nav>
 </div>

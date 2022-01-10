@@ -1,9 +1,11 @@
 package com.codeup.springblog.controllers;
 
 import com.codeup.springblog.models.Post;
+import com.codeup.springblog.models.User;
 import com.codeup.springblog.repositories.PostRepository;
 import com.codeup.springblog.repositories.UserRepository;
 import com.codeup.springblog.services.EmailService;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -58,7 +60,8 @@ public class PostController {
 //        dez.setPassword("dez");
 //        dez.setEmail("dez@send.com");
 //        userDao.save(dez);
-        post.setPostCreator(userDao.getById(2L));
+        User postUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        post.setPostCreator(postUser);
 
         String emailSubject = post.getPostCreator().getUsername() + "your post has been created ";
 
