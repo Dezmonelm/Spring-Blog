@@ -1,12 +1,13 @@
 package com.codeup.springblog.controllers;
 
 import com.codeup.springblog.models.Post;
-import com.codeup.springblog.models.User;
+import com.codeup.springblog.repositories.PostRepository;
+import com.codeup.springblog.repositories.UserRepository;
+import com.codeup.springblog.services.EmailService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -14,10 +15,12 @@ public class PostController {
 
     private final PostRepository postDao;
     private final UserRepository userDao;
+    private final EmailService emailService;
 
-    public PostController(PostRepository postDao, UserRepository userDao) {
+    public PostController(PostRepository postDao, UserRepository userDao, EmailService emailService) {
         this.postDao = postDao;
         this.userDao = userDao;
+        this.emailService = emailService;
     }
 
     @GetMapping("/posts")
@@ -56,6 +59,12 @@ public class PostController {
 //        dez.setEmail("dez@send.com");
 //        userDao.save(dez);
         post.setPostCreator(userDao.getById(2L));
+
+        String emailSubject = post.getPostCreator().getUsername() + "your post has been created ";
+
+        String emailBody = "Good Job " + post.getBody();
+
+        emailService.prepareAndSend(post, emailSubject, emailBody);
 postDao.save(post);
 
 //        Post newPost1 = new Post("How would you like...", "to go get some pizza?");
